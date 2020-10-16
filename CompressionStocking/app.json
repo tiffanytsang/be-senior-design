@@ -17,10 +17,21 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "host.exp.exponent",
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.769297201074-a04dnnfsubn3fn14i7k66q20iv3c9ln2"
+        }
+      },
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "package": "host.exp.exponent",
+      "googleServicesFile": "./google-services.json"
     }
   }
 }

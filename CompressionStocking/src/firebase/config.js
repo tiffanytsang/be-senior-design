@@ -9,7 +9,7 @@ const firebaseConfig = {
     projectId: 'compressionstocking-90ddf',
     storageBucket: 'compressionstocking-90ddf.appspot.com',
     messagingSenderId: '769297201074',
-    appId: '1:769297201074:ios:245d0e279de035a878d6ab',
+    appId: '1:769297201074:ios:d887ae28db0928d078d6ab',
 };
 
 if (!firebase.apps.length) {
