@@ -3,6 +3,7 @@ import { FlatList, Keyboard, Text, TextInput, TouchableOpacity, View } from 'rea
 import styles from './styles';
 import { firebase } from '../../firebase/config'
 import * as GoogleSignIn from 'expo-google-app-auth';
+import GoogleFit, { Scopes } from 'react-native-google-fit'
 
 export default function HomeScreen(props) {
 
@@ -64,6 +65,29 @@ export default function HomeScreen(props) {
         )
     }
 
+    const googleFit = async () => {
+        console.log("enters google fit")
+        // await GoogleFit.checkIsAuthorized();
+        const options = {
+            scopes: [
+                Scopes.FITNESS_ACTIVITY_READ_WRITE,
+                Scopes.FITNESS_BODY_READ_WRITE,
+            ],
+        }
+        GoogleFit.authorize(options)
+            .then(authResult => {
+                if (authResult.success) {
+                    console.log("AUTH_SUCCESS");
+                } else {
+                    console.log("AUTH_DENIED", authResult, authResult.message);
+                }
+            })
+            .catch(() => {
+                console.log("AUTH_ERROR");
+            })
+        // console.log(GoogleFit.isAuthorized);
+    }
+
     const signOut = async () => {
         try {
             // await GoogleSignIn.revokeAccess();
@@ -111,6 +135,11 @@ export default function HomeScreen(props) {
                 </View>
             )} */}
             <Text style={styles.entityText}>Welcome home {props.route.params.loginResult.user.givenName}!</Text>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => googleFit()}>
+                <Text style={styles.buttonTitle}>Try Google fit</Text>
+            </TouchableOpacity>
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => signOut()}>
