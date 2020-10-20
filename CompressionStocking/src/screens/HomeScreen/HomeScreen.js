@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { FlatList, Keyboard, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import styles from './styles';
 import { firebase } from '../../firebase/config'
+import * as GoogleSignIn from 'expo-google-app-auth';
 
 export default function HomeScreen(props) {
 
     const [entityText, setEntityText] = useState('')
     const [entities, setEntities] = useState([])
 
+    // console.log("These are props from line 12", props)
+
     const entityRef = firebase.firestore().collection('entities')
-    const userID = props.extraData.id
+    const userID = props.route.params.loginResult.user.id
 
     useEffect(() => {
         entityRef
@@ -61,9 +64,29 @@ export default function HomeScreen(props) {
         )
     }
 
+    const signOut = async () => {
+        try {
+            // await GoogleSignIn.revokeAccess();
+            const accessToken = props.route.params.loginResult.accessToken;
+            const config = {
+                androidClientId: '769297201074-iioa7crqlu38alosdcob7ofr9ih6iq56.apps.googleusercontent.com',
+                iosClientId: '769297201074-a04dnnfsubn3fn14i7k66q20iv3c9ln2.apps.googleusercontent.com',
+            };
+            await GoogleSignIn.logOutAsync({ accessToken, ...config });;
+            // auth()
+            //     .signOut()
+            //     .then(() => alert('Your are signed out!'));
+            // setloggedIn(false);
+            // setuserInfo([]);
+            props.navigation.navigate("Login")
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <View style={styles.container}>
-            <View style={styles.formContainer}>
+            {/* <View style={styles.formContainer}>
                 <TextInput
                     style={styles.input}
                     placeholder='Add new entity'
@@ -86,7 +109,13 @@ export default function HomeScreen(props) {
                         removeClippedSubviews={true}
                     />
                 </View>
-            )}
+            )} */}
+            <Text style={styles.entityText}>Welcome home {props.route.params.loginResult.user.givenName}!</Text>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => signOut()}>
+                <Text style={styles.buttonTitle}>Logout</Text>
+            </TouchableOpacity>
         </View>
     )
 }

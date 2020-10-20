@@ -11,7 +11,6 @@ if (!global.atob) { global.atob = decode }
 const Stack = createStackNavigator();
 
 export default function App() {
-
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState(null)
 
@@ -19,6 +18,7 @@ export default function App() {
         const usersRef = firebase.firestore().collection('users');
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
+                console.log(user)
                 usersRef
                     .doc(user.uid)
                     .get()
@@ -45,16 +45,17 @@ export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                {user ? (
+                {/* {user ? (
                     <Stack.Screen name="Home">
                         {props => <HomeScreen {...props} extraData={user} />}
                     </Stack.Screen>
-                ) : (
-                        <>
-                            <Stack.Screen name="Login" component={LoginScreen} />
-                            <Stack.Screen name="Registration" component={RegistrationScreen} />
-                        </>
-                    )}
+                ) : ( */}
+                <>
+                    <Stack.Screen name="Login" component={LoginScreen} />
+                    <Stack.Screen name="Registration" component={RegistrationScreen} />
+                    <Stack.Screen name="Home" component={HomeScreen} />
+                </>
+                {/* // )} */}
             </Stack.Navigator>
         </NavigationContainer>
     );
