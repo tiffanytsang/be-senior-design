@@ -4,6 +4,7 @@ import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 import * as GoogleSignIn from 'expo-google-app-auth';
+import GoogleFit, { Scopes } from 'react-native-google-fit'
 
 export default function LoginScreen({ navigation }) {
   const [user, setUser] = useState(null);
@@ -21,7 +22,7 @@ export default function LoginScreen({ navigation }) {
       const loginResult = await GoogleSignIn.logInAsync({
         androidClientId: '769297201074-iioa7crqlu38alosdcob7ofr9ih6iq56.apps.googleusercontent.com',
         iosClientId: '769297201074-a04dnnfsubn3fn14i7k66q20iv3c9ln2.apps.googleusercontent.com',
-        scopes: ['profile', 'email',],
+        scopes: ['profile', 'email', Scopes.FITNESS_ACTIVITY_READ_WRITE, Scopes.FITNESS_BODY_READ_WRITE,],
       });
 
       if (loginResult.type === 'success') {
@@ -31,6 +32,21 @@ export default function LoginScreen({ navigation }) {
         console.log(loginResult)
         setUser(loginResult);
         // return loginResult.accessToken;
+
+        const url = 'https://www.googleapis.com/fitness/v1/users/me/dataSources';
+
+        const header = {
+          'Content-Type': 'application/json; charset=utf-8',
+          'Authorization': `BEARER ${loginResult.accessToken}`
+        }
+
+        const fitness = await fetch(url, {
+            method: "GET",
+            headers: header
+        })
+
+        const fitnessResponse = await fitness.json();
+        console.log(fitnessResponse)
 
         const usersRef = firebase.firestore().collection('users');
         firebase.auth().onAuthStateChanged(loginResult => {
