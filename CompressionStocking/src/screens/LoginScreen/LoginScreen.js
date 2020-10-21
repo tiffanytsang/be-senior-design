@@ -25,28 +25,46 @@ export default function LoginScreen({ navigation }) {
         scopes: ['profile', 'email', Scopes.FITNESS_ACTIVITY_READ_WRITE, Scopes.FITNESS_BODY_READ_WRITE,],
       });
 
+
+      console.log("Login result from line 32", loginResult)
       if (loginResult.type === 'success') {
         let userInfoResponse = await fetch('https://www.googleapis.com/userinfo/v2/me', {
           headers: { Authorization: `Bearer ${loginResult.accessToken}` },
         });
-        console.log(loginResult)
+        console.log("let me print this now", userInfoResponse.json())
+
         setUser(loginResult);
         // return loginResult.accessToken;
 
         const url = 'https://www.googleapis.com/fitness/v1/users/me/dataSources';
-
-        const header = {
-          'Content-Type': 'application/json; charset=utf-8',
-          'Authorization': `BEARER ${loginResult.accessToken}`
-        }
-
+        const bearer = 'Bearer ' + loginResult.accessToken;
         const fitness = await fetch(url, {
-            method: "GET",
-            headers: header
+          method: 'GET',
+          withCredentials: true,
+          credentials: 'include',
+          headers: {
+            'Authorization': bearer,
+            'X-FP-API-KEY': 'iphone', //it can be iPhone or your any other attribute
+            'Content-Type': 'application/json; charset=utf-8'
+          }
         })
 
+        // .then(responseJson => {
+        //   // var items = JSON.parse(responseJson._bodyInit);
+        // }).catch(error => console.log(error));
+
+        // const header = {
+        //   'Content-Type': 'application/json; charset=utf-8',
+        //   Authorization: `BEARER ${loginResult.refreshToken}`
+        // }
+
+        // const fitness = await fetch(url, {
+        //   method: "GET",
+        //   headers: header
+        // })
+
         const fitnessResponse = await fitness.json();
-        console.log(fitnessResponse)
+        console.log("fitnessresponse", fitnessResponse)
 
         const usersRef = firebase.firestore().collection('users');
         firebase.auth().onAuthStateChanged(loginResult => {
@@ -68,7 +86,7 @@ export default function LoginScreen({ navigation }) {
         // return { cancelled: true };
       }
     } catch (e) {
-      console.log(e)
+      console.log("Error from line 73ish", e)
       return { error: true };
     }
   }
