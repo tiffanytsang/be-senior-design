@@ -31,7 +31,7 @@ export default StyleSheet.create({
         height: 47,
         borderRadius: 5,
         backgroundColor: '#788eec',
-        width: 80,
+        width: 180,
         alignItems: "center",
         justifyContent: 'center'
     },
@@ -52,5 +52,9 @@ export default StyleSheet.create({
     entityText: {
         fontSize: 20,
         color: '#333333'
-    }
+    },
+    space: {
+        width: 20, // or whatever size you need
+        height: 20,
+    },
 })
