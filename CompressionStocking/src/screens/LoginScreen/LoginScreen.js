@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { firebase } from '../../firebase/config'
-import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import styles from './styles';
+import { firebase } from '../../firebase/config'
 import * as GoogleSignIn from 'expo-google-app-auth';
 import GoogleFit, { Scopes } from 'react-native-google-fit'
+import { LinearGradient } from 'expo-linear-gradient'
+import styles from './styles';
 
 export default function LoginScreen({ navigation }) {
   const [user, setUser] = useState(null);
@@ -12,10 +13,6 @@ export default function LoginScreen({ navigation }) {
   const onFooterLinkPress = () => {
     navigation.navigate('Registration')
   }
-
-  // useEffect(() => {
-  //   //loginInWithGoogle();
-  // }, []);
 
   const loginInWithGoogle = async () => {
     try {
@@ -25,46 +22,11 @@ export default function LoginScreen({ navigation }) {
         scopes: ['profile', 'email', Scopes.FITNESS_ACTIVITY_READ_WRITE, Scopes.FITNESS_BODY_READ_WRITE,],
       });
 
-
-      console.log("Login result from line 32", loginResult)
       if (loginResult.type === 'success') {
         let userInfoResponse = await fetch('https://www.googleapis.com/userinfo/v2/me', {
           headers: { Authorization: `Bearer ${loginResult.accessToken}` },
         });
-        console.log("let me print this now", userInfoResponse.json())
-
         setUser(loginResult);
-        // return loginResult.accessToken;
-
-        const url = 'https://www.googleapis.com/fitness/v1/users/me/dataSources';
-        const bearer = 'Bearer ' + loginResult.accessToken;
-        const fitness = await fetch(url, {
-          method: 'GET',
-          withCredentials: true,
-          credentials: 'include',
-          headers: {
-            'Authorization': bearer,
-            'X-FP-API-KEY': 'iphone', //it can be iPhone or your any other attribute
-            'Content-Type': 'application/json; charset=utf-8'
-          }
-        })
-
-        // .then(responseJson => {
-        //   // var items = JSON.parse(responseJson._bodyInit);
-        // }).catch(error => console.log(error));
-
-        // const header = {
-        //   'Content-Type': 'application/json; charset=utf-8',
-        //   Authorization: `BEARER ${loginResult.refreshToken}`
-        // }
-
-        // const fitness = await fetch(url, {
-        //   method: "GET",
-        //   headers: header
-        // })
-
-        const fitnessResponse = await fitness.json();
-        console.log("fitnessresponse", fitnessResponse)
 
         const usersRef = firebase.firestore().collection('users');
         firebase.auth().onAuthStateChanged(loginResult => {
@@ -73,7 +35,7 @@ export default function LoginScreen({ navigation }) {
             .get()
             .then((document) => {
               const userData = document.data()
-              console.log("firbase user data", userData) // this is wrong this returns tiffany@email.com
+              // console.log("firbase user data", userData) // this is wrong this returns tiffany@email.com
             })
             .catch((error) => {
               console.log("User not found in firebase.")
@@ -86,86 +48,36 @@ export default function LoginScreen({ navigation }) {
         // return { cancelled: true };
       }
     } catch (e) {
-      console.log("Error from line 73ish", e)
+      console.log("Error from line 49ish", e)
       return { error: true };
     }
   }
 
-  // return (
-  //   <Text onPress={onPress}>Toggle Auth</Text>
-  // );
   return (
     <View style={styles.container}>
-      <KeyboardAwareScrollView
-        style={{ flex: 1, width: '100%' }}
-        keyboardShouldPersistTaps="always">
-        <Image
-          style={styles.logo}
-          source={require('../../../assets/icon.png')}
-        />
-        {/* <TextInput
-          style={styles.input}
-          placeholder='E-mail'
-          placeholderTextColor="#aaaaaa"
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-          underlineColorAndroid="transparent"
-          autoCapitalize="none"
-        />
-        <TextInput
-          style={styles.input}
-          placeholderTextColor="#aaaaaa"
-          secureTextEntry
-          placeholder='Password'
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-          underlineColorAndroid="transparent"
-          autoCapitalize="none"
-        /> */}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => loginInWithGoogle()}>
-          <Text style={styles.buttonTitle}>Log in</Text>
-        </TouchableOpacity>
-        <View style={styles.footerView}>
-          <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
-        </View>
-      </KeyboardAwareScrollView>
+      <LinearGradient
+        colors={['#e5f8e5', '#b6edb6', '#67d967']}
+        style={{ flex: 1 }}
+      >
+        <KeyboardAwareScrollView
+          style={{ flex: 1, width: '100%' }}
+          keyboardShouldPersistTaps="always">
+          <Image
+            style={styles.logo}
+            source={require('../../../assets/icon.jpg')}
+          />
+          <Text style={styles.title}>Dynamic Compression Sock</Text>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => loginInWithGoogle()}>
+            <Text style={styles.buttonTitle}>Log in</Text>
+          </TouchableOpacity>
+          <View style={styles.footerView}>
+            <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
+          </View>
+        </KeyboardAwareScrollView>
+      </LinearGradient>
     </View>
+
   )
-
-  // render() {
-  //     return <Text onPress={this.onPress}>Toggle Auth</Text>;
-  // }
 }
-
-
-
-// const onLoginPress = () => {
-//     firebase
-//         .auth()
-//         .signInWithEmailAndPassword(email, password)
-//         .then((response) => {
-//             const uid = response.user.uid
-//             const usersRef = firebase.firestore().collection('users')
-//             usersRef
-//                 .doc(uid)
-//                 .get()
-//                 .then(firestoreDocument => {
-//                     if (!firestoreDocument.exists) {
-//                         alert("User does not exist anymore.")
-//                         return;
-//                     }
-//                     const user = firestoreDocument.data()
-//                     navigation.navigate('Home', { user })
-//                 })
-//                 .catch(error => {
-//                     alert(error)
-//                 });
-//         })
-//         .catch(error => {
-//             alert(error)
-//         })
-// }
-
-

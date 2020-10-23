@@ -3,10 +3,12 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        justifyContent: 'center'
     },
     title: {
-
+        fontSize: 50,
+        fontWeight: "bold",
+        alignSelf: "center",
     },
     logo: {
         flex: 1,
