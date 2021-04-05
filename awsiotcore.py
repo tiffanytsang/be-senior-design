@@ -4,7 +4,11 @@ from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 
 #Define Variables
 delay = 0.5
-pad_channel = 0
+pad_channel_1 = 0
+pad_channel_2 = 1
+pad_channel_3 = 2
+pad_channel_4 = 3
+pad_channel_5 = 4
 
 #Create SPI
 spi = spidev.SpiDev()
@@ -30,23 +34,29 @@ print ('Initiating Realtime Data Transfer From Raspberry Pi...')
 myMQTTClient.connect()
 
 try:
-    prev_pad_value=0
+    # prev_pad_value_1=0
     while True:
 
-        pad_value = readadc(pad_channel)
-
-        #if the last reading was low and this one high, alert us
-        if (abs(pad_value-prev_pad_value) > 10):
-            print("---------------------------------------")
-            print("Pressure Pad Value: %d" % pad_value)
-            myMQTTClient.publish(
-                topic="home/helloworld",
-                QoS=1,
-                payload=str(pad_value)
-            )
+        pad_value_1 = readadc(pad_channel_1)
+        pad_value_2 = readadc(pad_channel_2)
+        pad_value_3 = readadc(pad_channel_3)
+        pad_value_4 = readadc(pad_channel_4)
+        pad_value_5 = readadc(pad_channel_5)
+        # if (abs(pad_value_1-prev_pad_value) > 10):
+        print("---------------------------------------")
+        print("Pressure Pad Value 1: %d" % pad_value_1)
+        print("Pressure Pad Value 2: %d" % pad_value_2)
+        print("Pressure Pad Value 3: %d" % pad_value_3)
+        print("Pressure Pad Value 4: %d" % pad_value_4)
+        print("Pressure Pad Value 5: %d" % pad_value_5)
+        myMQTTClient.publish(
+            topic="home/helloworld",
+            QoS=1,
+            payload=str(pad_value_1)+","+str(pad_value_2)+","+str(pad_value_3)+","+str(pad_value_4)+","+str(pad_value_5)
+        )
 
         #update previous input
-        prev_pad_value = pad_value
+        # prev_pad_value = pad_value_1
         #slight pause
         time.sleep(delay)
 
