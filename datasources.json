@@ -1,0 +1,618 @@
+{
+    "dataSource": [
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "duration",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.active_minutes"
+            },
+            "dataStreamName": "from_activity<-merge_activity_segments",
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "dataStreamId": "derived:com.google.active_minutes:com.google.android.gms:from_activity<-merge_activity_segments",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "duration",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.active_minutes"
+            },
+            "dataStreamName": "from_steps<-estimated_steps",
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "dataStreamId": "derived:com.google.active_minutes:com.google.android.gms:from_steps<-estimated_steps",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "duration",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.active_minutes"
+            },
+            "dataStreamName": "merge_active_minutes",
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "dataStreamId": "derived:com.google.active_minutes:com.google.android.gms:merge_active_minutes",
+            "type": "derived"
+        },
+        {
+            "dataStreamName": "session_activity_segment",
+            "dataType": {
+                "field": [
+                    {
+                        "name": "activity",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.activity.segment"
+            },
+            "dataQualityStandard": [],
+            "application": {
+                "packageName": "com.google.android.apps.fitness"
+            },
+            "device": {
+                "model": "Falster 2",
+                "version": "",
+                "type": "watch",
+                "uid": "c2636559",
+                "manufacturer": "Compal"
+            },
+            "dataStreamId": "derived:com.google.activity.segment:com.google.android.apps.fitness:Compal:Falster 2:c2636559:session_activity_segment",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "activity",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.activity.segment"
+            },
+            "dataStreamName": "session_activity_segment",
+            "application": {
+                "packageName": "com.google.android.apps.fitness"
+            },
+            "dataStreamId": "derived:com.google.activity.segment:com.google.android.apps.fitness:session_activity_segment",
+            "type": "derived"
+        },
+        {
+            "dataStreamName": "activity_from_steps",
+            "dataType": {
+                "field": [
+                    {
+                        "name": "activity",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.activity.segment"
+            },
+            "dataQualityStandard": [],
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "device": {
+                "model": "Falster 2",
+                "version": "",
+                "type": "watch",
+                "uid": "c2636559",
+                "manufacturer": "Compal"
+            },
+            "dataStreamId": "derived:com.google.activity.segment:com.google.android.gms:Compal:Falster 2:c2636559:activity_from_steps",
+            "type": "derived"
+        },
+        {
+            "dataStreamName": "activity_from_steps",
+            "dataType": {
+                "field": [
+                    {
+                        "name": "activity",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.activity.segment"
+            },
+            "dataQualityStandard": [],
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "device": {
+                "model": "iphone",
+                "type": "phone",
+                "uid": "1e3aeea5",
+                "manufacturer": "appleinc."
+            },
+            "dataStreamId": "derived:com.google.activity.segment:com.google.android.gms:appleinc.:iphone:1e3aeea5:activity_from_steps",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "activity",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.activity.segment"
+            },
+            "dataStreamName": "merge_activity_segments",
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "dataStreamId": "derived:com.google.activity.segment:com.google.android.gms:merge_activity_segments",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "activity",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.activity.segment"
+            },
+            "dataStreamName": "session_activity_segment",
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "dataStreamId": "derived:com.google.activity.segment:com.google.android.gms:session_activity_segment",
+            "type": "derived"
+        },
+        {
+            "dataStreamName": "local_data",
+            "dataType": {
+                "field": [
+                    {
+                        "name": "activity",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.activity.segment"
+            },
+            "dataQualityStandard": [],
+            "application": {
+                "packageName": "com.google.fitkit"
+            },
+            "device": {
+                "model": "iphone",
+                "type": "phone",
+                "uid": "ce12ff22",
+                "manufacturer": "apple"
+            },
+            "dataStreamId": "derived:com.google.activity.segment:com.google.fitkit:apple:iphone:ce12ff22:local_data",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "calories",
+                        "format": "floatPoint"
+                    }
+                ],
+                "name": "com.google.calories.expended"
+            },
+            "dataStreamName": "from_activities",
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "dataStreamId": "derived:com.google.calories.expended:com.google.android.gms:from_activities",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "calories",
+                        "format": "floatPoint"
+                    }
+                ],
+                "name": "com.google.calories.expended"
+            },
+            "dataStreamName": "merge_calories_expended",
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "dataStreamId": "derived:com.google.calories.expended:com.google.android.gms:merge_calories_expended",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "calories",
+                        "format": "floatPoint"
+                    }
+                ],
+                "name": "com.google.calories.expended"
+            },
+            "dataStreamName": "platform_calories_expended",
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "dataStreamId": "derived:com.google.calories.expended:com.google.android.gms:platform_calories_expended",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "intensity",
+                        "format": "floatPoint"
+                    }
+                ],
+                "name": "com.google.heart_minutes"
+            },
+            "dataStreamName": "from_activity<-merge_activity_segments",
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "dataStreamId": "derived:com.google.heart_minutes:com.google.android.gms:from_activity<-merge_activity_segments",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "intensity",
+                        "format": "floatPoint"
+                    }
+                ],
+                "name": "com.google.heart_minutes"
+            },
+            "dataStreamName": "from_heart_rate<-merge_heart_rate_bpm",
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "dataStreamId": "derived:com.google.heart_minutes:com.google.android.gms:from_heart_rate<-merge_heart_rate_bpm",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "intensity",
+                        "format": "floatPoint"
+                    }
+                ],
+                "name": "com.google.heart_minutes"
+            },
+            "dataStreamName": "from_steps<-estimated_steps",
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "dataStreamId": "derived:com.google.heart_minutes:com.google.android.gms:from_steps<-estimated_steps",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "intensity",
+                        "format": "floatPoint"
+                    }
+                ],
+                "name": "com.google.heart_minutes"
+            },
+            "dataStreamName": "merge_heart_minutes",
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "dataStreamId": "derived:com.google.heart_minutes:com.google.android.gms:merge_heart_minutes",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "bpm",
+                        "format": "floatPoint"
+                    }
+                ],
+                "name": "com.google.heart_rate.bpm"
+            },
+            "dataStreamName": "merge_heart_rate_bpm",
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "dataStreamId": "derived:com.google.heart_rate.bpm:com.google.android.gms:merge_heart_rate_bpm",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "bpm",
+                        "format": "floatPoint"
+                    }
+                ],
+                "name": "com.google.heart_rate.bpm"
+            },
+            "dataStreamName": "resting_heart_rate<-merge_heart_rate_bpm",
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "dataStreamId": "derived:com.google.heart_rate.bpm:com.google.android.gms:resting_heart_rate<-merge_heart_rate_bpm",
+            "type": "derived"
+        },
+        {
+            "dataStreamName": "MyDataSource",
+            "dataType": {
+                "field": [
+                    {
+                        "name": "steps",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.step_count.delta"
+            },
+            "dataQualityStandard": [],
+            "application": {
+                "version": "1",
+                "name": "Foo Example App",
+                "detailsUrl": "http://example.com"
+            },
+            "device": {
+                "model": "ExampleTablet",
+                "version": "1.0",
+                "type": "tablet",
+                "uid": "1000001",
+                "manufacturer": "Example Manufacturer"
+            },
+            "dataStreamId": "derived:com.google.step_count.delta:407408718192:Example Manufacturer:ExampleTablet:1000001:MyDataSource",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "steps",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.step_count.delta"
+            },
+            "dataStreamName": "MyDataSource",
+            "application": {
+                "version": "1",
+                "name": "Foo Example App",
+                "detailsUrl": "http://example.com"
+            },
+            "dataStreamId": "derived:com.google.step_count.delta:407408718192:MyDataSource",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "steps",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.step_count.delta"
+            },
+            "dataStreamName": "heart rate",
+            "application": {
+                "version": "1",
+                "name": "Foo Example App",
+                "detailsUrl": "http://example.com"
+            },
+            "dataStreamId": "derived:com.google.step_count.delta:407408718192:heart rate",
+            "type": "derived"
+        },
+        {
+            "dataStreamName": "derive_step_deltas<-raw:com.google.step_count.cumulative:Compal:Falster 2:c2636559:Step Counter",
+            "dataType": {
+                "field": [
+                    {
+                        "name": "steps",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.step_count.delta"
+            },
+            "dataQualityStandard": [],
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "device": {
+                "model": "Falster 2",
+                "version": "",
+                "type": "watch",
+                "uid": "c2636559",
+                "manufacturer": "Compal"
+            },
+            "dataStreamId": "derived:com.google.step_count.delta:com.google.android.gms:Compal:Falster 2:c2636559:derive_step_deltas<-raw:com.google.step_count.cumulative:Compal:Falster 2:c2636559:Step Counter",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "steps",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.step_count.delta"
+            },
+            "dataStreamName": "estimated_steps",
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "dataStreamId": "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps",
+            "type": "derived"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "steps",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.step_count.delta"
+            },
+            "dataStreamName": "merge_step_deltas",
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "dataStreamId": "derived:com.google.step_count.delta:com.google.android.gms:merge_step_deltas",
+            "type": "derived"
+        },
+        {
+            "dataStreamName": "user_input",
+            "dataType": {
+                "field": [
+                    {
+                        "name": "activity",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.activity.segment"
+            },
+            "dataQualityStandard": [],
+            "application": {
+                "packageName": "com.google.android.apps.fitness"
+            },
+            "device": {
+                "model": "Falster 2",
+                "version": "",
+                "type": "watch",
+                "uid": "2e99fb6c",
+                "manufacturer": "Compal"
+            },
+            "dataStreamId": "raw:com.google.activity.segment:com.google.android.apps.fitness:Compal:Falster 2:2e99fb6c:user_input",
+            "type": "raw"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "bpm",
+                        "format": "floatPoint"
+                    }
+                ],
+                "name": "com.google.heart_rate.bpm"
+            },
+            "dataStreamName": "Heart Rate Monitor -Wakeup Secondary",
+            "device": {
+                "model": "Falster 2",
+                "version": "",
+                "type": "watch",
+                "uid": "c2636559",
+                "manufacturer": "Compal"
+            },
+            "dataStreamId": "raw:com.google.heart_rate.bpm:Compal:Falster 2:c2636559:Heart Rate Monitor -Wakeup Secondary",
+            "type": "raw"
+        },
+        {
+            "dataStreamName": "manual",
+            "dataType": {
+                "field": [
+                    {
+                        "name": "bpm",
+                        "format": "floatPoint"
+                    }
+                ],
+                "name": "com.google.heart_rate.bpm"
+            },
+            "dataQualityStandard": [],
+            "application": {
+                "packageName": "com.google.android.apps.fitness"
+            },
+            "device": {
+                "model": "Falster 2",
+                "version": "",
+                "type": "watch",
+                "uid": "2e99fb6c",
+                "manufacturer": "Compal"
+            },
+            "dataStreamId": "raw:com.google.heart_rate.bpm:com.google.android.apps.fitness:Compal:Falster 2:2e99fb6c:manual",
+            "type": "raw"
+        },
+        {
+            "dataQualityStandard": [],
+            "dataType": {
+                "field": [
+                    {
+                        "name": "steps",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.step_count.cumulative"
+            },
+            "dataStreamName": "Step Counter",
+            "device": {
+                "model": "Falster 2",
+                "version": "",
+                "type": "watch",
+                "uid": "c2636559",
+                "manufacturer": "Compal"
+            },
+            "dataStreamId": "raw:com.google.step_count.cumulative:Compal:Falster 2:c2636559:Step Counter",
+            "type": "raw"
+        },
+        {
+            "dataStreamName": "derive_step_deltas",
+            "dataType": {
+                "field": [
+                    {
+                        "name": "steps",
+                        "format": "integer"
+                    }
+                ],
+                "name": "com.google.step_count.delta"
+            },
+            "dataQualityStandard": [],
+            "application": {
+                "packageName": "com.google.android.gms"
+            },
+            "device": {
+                "model": "iphone",
+                "type": "phone",
+                "uid": "1e3aeea5",
+                "manufacturer": "appleinc."
+            },
+            "dataStreamId": "raw:com.google.step_count.delta:com.google.android.gms:appleinc.:iphone:1e3aeea5:derive_step_deltas",
+            "type": "raw"
+        }
+    ]
+}
