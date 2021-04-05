@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4268A3"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView_title"
+        android:layout_width="match_parent"
+        android:layout_height="123dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="TULA"
+        android:textAlignment="center"
+        android:textColor="#A4C5D6"
+        android:textSize="36sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <Button
+            android:id="@+id/button_heartrate"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="#A4C5D6"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:onClick="checkHeartRate"
+            android:text="Check My Heart Rate"
+            android:textColor="#4268A3"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <Button
+            android:id="@+id/button_pressure"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="#A4C5D6"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:onClick="checkPressure"
+            android:text="Change My Pressure"
+            android:textColor="#4268A3"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <Button
+            android:id="@+id/button_userinput"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="#A4C5D6"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:onClick="adjustParameters"
+            android:text="Adjust My Parameters"
+            android:textColor="#4268A3"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+</LinearLayout>
