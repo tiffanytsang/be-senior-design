@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4268A3"
+    android:background="#274370"
     android:orientation="vertical">
 
     <TextView
@@ -13,7 +13,7 @@
         android:gravity="center"
         android:text="TULA"
         android:textAlignment="center"
-        android:textColor="#A4C5D6"
+        android:textColor="#A9D4F8"
         android:textSize="36sp" />
 
     <TextView
@@ -24,7 +24,7 @@
         android:gravity="center"
         android:text="Change Pressure Parameters"
         android:textAlignment="center"
-        android:textColor="#A4C5D6"
+        android:textColor="#A9D4F8"
         android:textSize="18sp" />
 
     <RelativeLayout
@@ -35,7 +35,7 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#A4C5D6"
+            android:background="#A9D4F8"
             android:layout_centerInParent="true"
             android:orientation="vertical"
             android:visibility="visible">
@@ -49,7 +49,7 @@
                 android:gravity="center"
                 android:text="Pressure Band 1"
                 android:textAlignment="center"
-                android:textColor="#4268A3"
+                android:textColor="#274370"
                 android:textSize="24sp" />
 
             <EditText
@@ -62,7 +62,7 @@
                 android:gravity="center"
                 android:hint="Enter Circumference (cm)"
                 android:textAlignment="center"
-                android:textColor="#4268A3" />
+                android:textColor="#274370" />
 
         </LinearLayout>
 
@@ -81,7 +81,7 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#A4C5D6"
+            android:background="#A9D4F8"
             android:layout_centerInParent="true"
             android:orientation="vertical"
             android:visibility="visible">
@@ -95,7 +95,7 @@
                 android:gravity="center"
                 android:text="Pressure Band 2"
                 android:textAlignment="center"
-                android:textColor="#4268A3"
+                android:textColor="#274370"
                 android:textSize="24sp" />
 
             <EditText
@@ -108,7 +108,7 @@
                 android:gravity="center"
                 android:hint="Enter Circumference (cm)"
                 android:textAlignment="center"
-                android:textColor="#4268A3" />
+                android:textColor="#274370" />
 
         </LinearLayout>
 
@@ -127,7 +127,7 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#A4C5D6"
+            android:background="#A9D4F8"
             android:layout_centerInParent="true"
             android:orientation="vertical"
             android:visibility="visible">
@@ -139,9 +139,9 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-black"
                 android:gravity="center"
-                android:hint="Pressure Band 3"
+                android:text="Pressure Band 3"
                 android:textAlignment="center"
-                android:textColor="#4268A3"
+                android:textColor="#274370"
                 android:textSize="24sp" />
 
             <EditText
@@ -154,7 +154,7 @@
                 android:gravity="center"
                 android:hint="Enter Circumference (cm)"
                 android:textAlignment="center"
-                android:textColor="#4268A3" />
+                android:textColor="#274370" />
 
         </LinearLayout>
 
@@ -173,7 +173,7 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#A4C5D6"
+            android:background="#A9D4F8"
             android:layout_centerInParent="true"
             android:orientation="vertical"
             android:visibility="visible">
@@ -187,7 +187,7 @@
                 android:gravity="center"
                 android:text="Pressure Band 4"
                 android:textAlignment="center"
-                android:textColor="#4268A3"
+                android:textColor="#274370"
                 android:textSize="24sp" />
 
             <EditText
@@ -200,7 +200,7 @@
                 android:gravity="center"
                 android:hint="Enter Circumference (cm)"
                 android:textAlignment="center"
-                android:textColor="#4268A3" />
+                android:textColor="#274370" />
 
         </LinearLayout>
 
@@ -219,7 +219,7 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#A4C5D6"
+            android:background="#A9D4F8"
             android:layout_centerInParent="true"
             android:orientation="vertical"
             android:visibility="visible">
@@ -233,7 +233,7 @@
                 android:gravity="center"
                 android:text="Pressure Band 5"
                 android:textAlignment="center"
-                android:textColor="#4268A3"
+                android:textColor="#274370"
                 android:textSize="24sp" />
 
             <EditText
@@ -246,7 +246,7 @@
                 android:gravity="center"
                 android:hint="Enter Circumference (cm)"
                 android:textAlignment="center"
-                android:textColor="#4268A3" />
+                android:textColor="#274370" />
 
         </LinearLayout>
 
@@ -264,13 +264,13 @@
             android:id="@+id/button_submit"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:background="#A4C5D6"
+            android:background="#A9D4F8"
             android:fontFamily="sans-serif-black"
             android:gravity="center"
             android:layout_centerInParent="true"
             android:onClick="changeParameters"
             android:text="Submit"
-            android:textColor="#4268A3"
+            android:textColor="#274370"
             android:textSize="18sp" />
     </RelativeLayout>
 
@@ -281,13 +281,13 @@
             android:id="@+id/button_back"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:background="#A4C5D6"
+            android:background="#A9D4F8"
             android:fontFamily="sans-serif-black"
             android:gravity="center"
             android:layout_centerInParent="true"
             android:onClick="back"
             android:text="Back"
-            android:textColor="#4268A3"
+            android:textColor="#274370"
             android:textSize="18sp" />
     </RelativeLayout>
 

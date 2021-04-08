@@ -9,10 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
-import com.amazonaws.mobileconnectors.iot.AWSIotMqttClientStatusCallback;
-import com.amazonaws.mobileconnectors.iot.AWSIotMqttManager;
-import com.amazonaws.mobileconnectors.iot.AWSIotMqttNewMessageCallback;
-import com.amazonaws.mobileconnectors.iot.AWSIotMqttQos;
 import com.amazonaws.regions.Regions;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -21,9 +17,8 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-import org.json.JSONArray;
 
-import java.io.UnsupportedEncodingException;
+import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -45,12 +40,10 @@ public class HeartRateActivity extends Activity implements MqttCallback {
 
     TextView textView_hrReading;
     TextView textView_percentage;
-    AWSIotMqttManager mqttManager;
     String clientId;
     CognitoCachingCredentialsProvider credentialsProvider;
 
     ArrayList<Integer> minHeartRate = new ArrayList<>();
-    ArrayList<Integer> maxHeartRate = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +100,7 @@ public class HeartRateActivity extends Activity implements MqttCallback {
     public void messageArrived(String topic, MqttMessage message) throws Exception {
         String payload = new String(message.getPayload());
         JSONArray json = new JSONArray(payload);
+        Log.d(LOG_TAG, "Heart rate json: " + json);
         try {
             int averageHr = 0;
             int min = Integer.MAX_VALUE;
@@ -134,25 +128,18 @@ public class HeartRateActivity extends Activity implements MqttCallback {
                 }
             }
 
-            //max from the past minute, min from the past 10 minutes
+            // Max from the past minute, min from the past 10 minutes
             int range = maxFromPastMinute - minOfMin;
             if (range >= 30) {
                 alertUser("heart rate", range);
             }
             textView_hrReading.setText("" + averageHr);
 
-            //likelihood of POTS attack (same screen as HR)
-            //HR increase --> percent
-            // 0 --> 0
-            // map out the rest
-            // above 60% = alert
-            // 30 --> 70
-            // 50 --> 100
+            // Likelihood of POTS attack
             textView_percentage.setText("" + range * 2);
 
             if (minHeartRate.size() > 10) {
                 minHeartRate.remove(0);
-                maxHeartRate.remove(0);
             }
 
         } catch (Exception e) { e.printStackTrace(); }

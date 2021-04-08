@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ChangeParametersActivity extends Activity {
 
@@ -30,6 +31,16 @@ public class ChangeParametersActivity extends Activity {
         intent.putExtra("pressure3", editText3.getText());
         intent.putExtra("pressure4", editText4.getText());
         intent.putExtra("pressure5", editText5.getText());
+
+        final Activity activity = this;
+        runOnUiThread(new Runnable() {
+            public void run() {
+            final Toast toast = Toast.makeText( activity,
+                    "Parameters changed successfully!",
+                    Toast.LENGTH_SHORT);
+            toast.show();
+            }
+        });
 
         startActivity(intent);
     }
