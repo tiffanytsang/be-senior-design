@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class PressureActivity extends Activity {
-    TextView textView_pReading;
+    TextView textView_pReading1, textView_pReading2, textView_pReading3, textView_pReading4, textView_pReading5;
     AWSIotMqttManager mqttManager;
     static final String LOG_TAG = PressureActivity.class.getCanonicalName();
 
@@ -57,7 +57,12 @@ public class PressureActivity extends Activity {
                 MY_REGION // Region
         );
 
-        textView_pReading = (TextView) findViewById(R.id.textView_pReading);
+        textView_pReading1 = (TextView) findViewById(R.id.textView_pReading1);
+        textView_pReading2 = (TextView) findViewById(R.id.textView_pReading2);
+        textView_pReading3 = (TextView) findViewById(R.id.textView_pReading3);
+        textView_pReading4 = (TextView) findViewById(R.id.textView_pReading4);
+        textView_pReading5 = (TextView) findViewById(R.id.textView_pReading5);
+
         // MQTT Client
         mqttManager = new AWSIotMqttManager(clientId, CUSTOMER_SPECIFIC_ENDPOINT);
         mqttManager.connect(credentialsProvider, new AWSIotMqttClientStatusCallback() {
@@ -94,11 +99,11 @@ public class PressureActivity extends Activity {
                                                             }
                                                         }
                                                         Log.d(LOG_TAG, " Calibrated Pressures: " + calibratedPressureReadings);
-                                                        textView_pReading.setText(""+calibratedPressureReadings.get(0));
-
-                                                        //5 different pressure readings on app placed next to sock
-
-                                                        //make lightblue lighter and dark blue darker
+                                                        textView_pReading1.setText(""+calibratedPressureReadings.get(0));
+                                                        textView_pReading2.setText(""+calibratedPressureReadings.get(1));
+                                                        textView_pReading3.setText(""+calibratedPressureReadings.get(2));
+                                                        textView_pReading4.setText(""+calibratedPressureReadings.get(3));
+                                                        textView_pReading5.setText(""+calibratedPressureReadings.get(4));
                                                     } catch (UnsupportedEncodingException e) {
                                                         Log.e(LOG_TAG, "Message encoding error.", e);
                                                     }
@@ -136,11 +141,11 @@ public class PressureActivity extends Activity {
 
         Bundle bundle = getIntent().getExtras();
 
-        double circumference1 = bundle.getDouble("circumference1", 1);
-        double circumference2 = bundle.getDouble("circumference2", 1);
-        double circumference3 = bundle.getDouble("circumference3", 1);
-        double circumference4 = bundle.getDouble("circumference4", 1);
-        double circumference5 = bundle.getDouble("circumference5", 1);
+        double circumference1 = bundle.getDouble("circumference1", 5.1);
+        double circumference2 = bundle.getDouble("circumference2", 5.5);
+        double circumference3 = bundle.getDouble("circumference3", 5.7);
+        double circumference4 = bundle.getDouble("circumference4", 5.4);
+        double circumference5 = bundle.getDouble("circumference5", 5.2);
 
         double radius1 = circumference1 / (2*Math.PI);
         double radius2 = circumference2 / (2*Math.PI);
@@ -150,14 +155,18 @@ public class PressureActivity extends Activity {
 
         double thickness = .002;
         double epsilon = 1.74*(10^6); // units: N/m^2
-        double baseRes = 2*(10^3); // units: Ohms
+        double baseRes1 = 2*(10^3); // units: Ohms
+        double baseRes2 = 2*(10^3);
+        double baseRes3 = 2*(10^3);
+        double baseRes4 = 2*(10^3);
+        double baseRes5 = 2*(10^3);
 
         //formula
-        double strain1 = pad_value1 * (10^3) / (baseRes * 1023);
-        double strain2 = pad_value2 * (10^3) / (baseRes * 1023);
-        double strain3 = pad_value3 * (10^3) / (baseRes * 1023);
-        double strain4 = pad_value4 * (10^3) / (baseRes * 1023);
-        double strain5 = pad_value5 * (10^3) / (baseRes * 1023);
+        double strain1 = pad_value1 * (10^3) / (baseRes1 * 1023);
+        double strain2 = pad_value2 * (10^3) / (baseRes2 * 1023);
+        double strain3 = pad_value3 * (10^3) / (baseRes3 * 1023);
+        double strain4 = pad_value4 * (10^3) / (baseRes4 * 1023);
+        double strain5 = pad_value5 * (10^3) / (baseRes5 * 1023);
 
         //for validation: convert to csv file
         ArrayList<Integer> calibratedPressureReadings = new ArrayList<>();
