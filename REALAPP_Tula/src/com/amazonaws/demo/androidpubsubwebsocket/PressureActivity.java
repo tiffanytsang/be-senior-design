@@ -89,7 +89,7 @@ public class PressureActivity extends Activity {
                                                 public void run() {
                                                     try {
                                                         String message = new String(data, "UTF-8");
-                                                        ArrayList<Integer> calibratedPressureReadings = calibrateRawPressureReadings(message);
+                                                        ArrayList<Double> calibratedPressureReadings = calibrateRawPressureReadings(message);
                                                         for (int i = 0; i < calibratedPressureReadings.size(); i++) {
                                                             if (calibratedPressureReadings.get(i) >= 35) {
                                                                 alertUser("pressure", 1);
@@ -131,7 +131,9 @@ public class PressureActivity extends Activity {
         });
     }
 
-    public ArrayList<Integer> calibrateRawPressureReadings(String rawReading) {
+    public ArrayList<Double> calibrateRawPressureReadings(String rawReading) {
+
+        //TODO: add tula logo, make light blue lighter, make white text dark blue
         String [] array = rawReading.split(",");
         double pad_value1 = Double.parseDouble(array[0]);
         double pad_value2 = Double.parseDouble(array[1]);
@@ -139,13 +141,15 @@ public class PressureActivity extends Activity {
         double pad_value4 = Double.parseDouble(array[3]);
         double pad_value5 = Double.parseDouble(array[4]);
 
+        Log.d(LOG_TAG, "Pad value: " + pad_value1 + " " + pad_value2 + " " + pad_value3 + " " + pad_value4 + " " + pad_value5);
+
         Bundle bundle = getIntent().getExtras();
 
-        double circumference1 = bundle.getDouble("circumference1", 5.1);
-        double circumference2 = bundle.getDouble("circumference2", 5.5);
-        double circumference3 = bundle.getDouble("circumference3", 5.7);
-        double circumference4 = bundle.getDouble("circumference4", 5.4);
-        double circumference5 = bundle.getDouble("circumference5", 5.2);
+        double circumference1 = bundle.getDouble("circumference1", .351);
+        double circumference2 = bundle.getDouble("circumference2", .345);
+        double circumference3 = bundle.getDouble("circumference3", .307);
+        double circumference4 = bundle.getDouble("circumference4", .254);
+        double circumference5 = bundle.getDouble("circumference5", .245);
 
         double radius1 = circumference1 / (2*Math.PI);
         double radius2 = circumference2 / (2*Math.PI);
@@ -153,28 +157,66 @@ public class PressureActivity extends Activity {
         double radius4 = circumference4 / (2*Math.PI);
         double radius5 = circumference5 / (2*Math.PI);
 
-        double thickness = .002;
-        double epsilon = 1.74*(10^6); // units: N/m^2
-        double baseRes1 = 2*(10^3); // units: Ohms
-        double baseRes2 = 2*(10^3);
-        double baseRes3 = 2*(10^3);
-        double baseRes4 = 2*(10^3);
-        double baseRes5 = 2*(10^3);
+        double r1 = 1000; // units: Ohms
+        double v_in = 3.3; // units: Volts
+        double thickness = .002; // units: meters
+        double epsilon = 1740000; // units: N/m^2
+        double baseRes1 = 1800; // units: Ohms
+        double baseRes2 = 1900;
+        double baseRes3 = 2000;
+        double baseRes4 = 1200;
+        double baseRes5 = 400;
 
         //formula
-        double strain1 = pad_value1 * (10^3) / (baseRes1 * 1023);
-        double strain2 = pad_value2 * (10^3) / (baseRes2 * 1023);
-        double strain3 = pad_value3 * (10^3) / (baseRes3 * 1023);
-        double strain4 = pad_value4 * (10^3) / (baseRes4 * 1023);
-        double strain5 = pad_value5 * (10^3) / (baseRes5 * 1023);
+        double v_out1 = pad_value1 * v_in / 1023;
+        double v_out2 = pad_value2 * v_in / 1023;
+        double v_out3 = pad_value3 * v_in / 1023;
+        double v_out4 = pad_value4 * v_in / 1023;
+        double v_out5 = pad_value5 * v_in / 1023;
+
+        double rpad1 = r1 / ((v_in/v_out1) - 1);
+        double rpad2 = r1 / ((v_in/v_out2) - 1);
+        double rpad3 = r1 / ((v_in/v_out3) - 1);
+        double rpad4 = r1 / ((v_in/v_out4) - 1);
+        double rpad5 = r1 / ((v_in/v_out5) - 1);
+
+        if (rpad1 < baseRes1) {
+            rpad1 = baseRes1;
+        }
+        if (rpad2 < baseRes2) {
+            rpad2 = baseRes2;
+        }
+        if (rpad3 < baseRes3) {
+            rpad3 = baseRes3;
+        }
+        if (rpad4 < baseRes4) {
+            rpad4 = baseRes4;
+        }
+        if (rpad5 < baseRes5) {
+            rpad5 = baseRes5;
+        }
+
+        Log.d(LOG_TAG, "rpad values: " + rpad1 + " " + rpad2 + " " + rpad3 + " " + rpad4 + " " + rpad5);
+
+        double strain1 = (rpad1 - baseRes1) / baseRes1;
+        double strain2 = (rpad2 - baseRes2) / baseRes2;
+        double strain3 = (rpad3 - baseRes3) / baseRes3;
+        double strain4 = (rpad4 - baseRes4) / baseRes4;
+        double strain5 = (rpad5 - baseRes5) / baseRes5;
+
+        Log.d(LOG_TAG, "Strain: " + strain1 + " " + strain2 + " " + strain3 + " " + strain4 + " " + strain5);
+
 
         //for validation: convert to csv file
-        ArrayList<Integer> calibratedPressureReadings = new ArrayList<>();
-        calibratedPressureReadings.add((int)(thickness / radius1 * strain1 / epsilon));
-        calibratedPressureReadings.add((int)(thickness / radius2 * strain2 / epsilon));
-        calibratedPressureReadings.add((int)(thickness / radius3 * strain3 / epsilon));
-        calibratedPressureReadings.add((int)(thickness / radius4 * strain4 / epsilon));
-        calibratedPressureReadings.add((int)(thickness / radius5 * strain5 / epsilon));
+        ArrayList<Double> calibratedPressureReadings = new ArrayList<>();
+        calibratedPressureReadings.add((thickness * strain1 * epsilon) / (radius1 * 133));
+        calibratedPressureReadings.add((thickness * strain2 * epsilon) / (radius2 * 133));
+        calibratedPressureReadings.add((thickness * strain3 * epsilon) / (radius3 * 133));
+        calibratedPressureReadings.add((thickness * strain4 * epsilon) / (radius4 * 133));
+        calibratedPressureReadings.add((thickness * strain5 * epsilon) / (radius5 * 133));
+
+        Log.d(LOG_TAG, "Calibrated Pressure: " + calibratedPressureReadings);
+
         return calibratedPressureReadings;
     }
 

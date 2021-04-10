@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/build/intermediates/res/merged/debug/layout_activity_login.xml.flat",
+        "source": "/Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/res/layout/activity_login.xml"
+    },
+    {
+        "merged": "/Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/build/intermediates/res/merged/debug/layout_activity_pressure.xml.flat",
+        "source": "/Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/res/layout/activity_pressure.xml"
+    },
+    {
+        "merged": "/Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/build/intermediates/res/merged/debug/drawable_ic_launcher.png.flat",
+        "source": "/Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/res/drawable/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/build/intermediates/res/merged/debug/layout_activity_homescreen.xml.flat",
+        "source": "/Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/res/layout/activity_homescreen.xml"
+    },
+    {
+        "merged": "/Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/build/intermediates/res/merged/debug/layout_activity_heartrate.xml.flat",
+        "source": "/Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/res/layout/activity_heartrate.xml"
+    },
+    {
+        "merged": "/Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/build/intermediates/res/merged/debug/layout_activity_changeparameters.xml.flat",
+        "source": "/Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/res/layout/activity_changeparameters.xml"
+    }
+]

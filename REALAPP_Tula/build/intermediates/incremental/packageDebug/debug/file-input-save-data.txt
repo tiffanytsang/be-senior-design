@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Thu Apr 08 13:57:28 EDT 2021
+0.baseType=DIRECTORY
+0.base=/Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/build/intermediates/transforms/dexMerger/debug/0
+0.path=classes.dex
+0.set=DEX
+count=1
