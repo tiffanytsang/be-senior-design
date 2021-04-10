@@ -5,8 +5,12 @@ INJECTED from /Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/Andr
 INJECTED from /Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/AndroidManifest.xml:2:1-32:12
 INJECTED from /Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/AndroidManifest.xml:2:1-32:12
 INJECTED from /Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/AndroidManifest.xml:2:1-32:12
+INJECTED from /Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/AndroidManifest.xml:2:1-32:12
+INJECTED from /Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/AndroidManifest.xml:2:1-32:12
 	package
 		ADDED from /Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/AndroidManifest.xml:3:5-56
+		INJECTED from /Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/AndroidManifest.xml
+		INJECTED from /Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/AndroidManifest.xml
 	android:versionName
 		ADDED from /Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/AndroidManifest.xml:5:5-30
 		INJECTED from /Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/AndroidManifest.xml
@@ -47,7 +51,7 @@ activity#com.amazonaws.demo.androidpubsubwebsocket.LoginActivity
 ADDED from /Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/AndroidManifest.xml:17:9-22:20
 	android:name
 		ADDED from /Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/AndroidManifest.xml:17:19-89
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from /Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/AndroidManifest.xml:18:13-21:29
 action#android.intent.action.MAIN
 ADDED from /Users/tiffanytsang/Desktop/compression-stocking/REALAPP_Tula/AndroidManifest.xml:19:17-69

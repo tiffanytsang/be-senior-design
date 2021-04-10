@@ -160,7 +160,7 @@ public class PressureActivity extends Activity {
         double r1 = 1000; // units: Ohms
         double v_in = 3.3; // units: Volts
         double thickness = .002; // units: meters
-        double epsilon = 1740000; // units: N/m^2
+        double epsilon = 938000; // units: N/m^2
         double baseRes1 = 1800; // units: Ohms
         double baseRes2 = 1900;
         double baseRes3 = 2000;

@@ -62,7 +62,8 @@
                 android:gravity="center"
                 android:hint="Enter Circumference (cm)"
                 android:textAlignment="center"
-                android:textColor="#274370" />
+                android:textColorHint="#274370"
+                android:textColor="#274370"/>
 
         </LinearLayout>
 
@@ -108,7 +109,7 @@
                 android:gravity="center"
                 android:hint="Enter Circumference (cm)"
                 android:textAlignment="center"
-                android:textColor="#274370" />
+                android:textColorHint="#274370" />
 
         </LinearLayout>
 
@@ -154,7 +155,7 @@
                 android:gravity="center"
                 android:hint="Enter Circumference (cm)"
                 android:textAlignment="center"
-                android:textColor="#274370" />
+                android:textColorHint="#274370" />
 
         </LinearLayout>
 
@@ -200,7 +201,7 @@
                 android:gravity="center"
                 android:hint="Enter Circumference (cm)"
                 android:textAlignment="center"
-                android:textColor="#274370" />
+                android:textColorHint="#274370" />
 
         </LinearLayout>
 
@@ -246,7 +247,7 @@
                 android:gravity="center"
                 android:hint="Enter Circumference (cm)"
                 android:textAlignment="center"
-                android:textColor="#274370" />
+                android:textColorHint="#274370" />
 
         </LinearLayout>
 

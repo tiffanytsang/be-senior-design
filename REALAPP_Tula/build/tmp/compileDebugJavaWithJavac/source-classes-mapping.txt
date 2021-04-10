@@ -1,0 +1,20 @@
+com/amazonaws/demo/androidpubsubwebsocket/PressureActivity.java
+ com.amazonaws.demo.androidpubsubwebsocket.PressureActivity
+ com.amazonaws.demo.androidpubsubwebsocket.PressureActivity$1
+ com.amazonaws.demo.androidpubsubwebsocket.PressureActivity$1$1
+ com.amazonaws.demo.androidpubsubwebsocket.PressureActivity$1$1$1
+ com.amazonaws.demo.androidpubsubwebsocket.PressureActivity$1$1$1$1
+ com.amazonaws.demo.androidpubsubwebsocket.PressureActivity$2
+ com.amazonaws.demo.androidpubsubwebsocket.PressureActivity$3
+com/amazonaws/demo/androidpubsubwebsocket/HeartRateActivity.java
+ com.amazonaws.demo.androidpubsubwebsocket.HeartRateActivity
+ com.amazonaws.demo.androidpubsubwebsocket.HeartRateActivity$1
+com/amazonaws/demo/androidpubsubwebsocket/ChangeParametersActivity.java
+ com.amazonaws.demo.androidpubsubwebsocket.ChangeParametersActivity
+ com.amazonaws.demo.androidpubsubwebsocket.ChangeParametersActivity$1
+com/amazonaws/demo/androidpubsubwebsocket/HomeScreenActivity.java
+ com.amazonaws.demo.androidpubsubwebsocket.HomeScreenActivity
+com/amazonaws/demo/androidpubsubwebsocket/BuildConfig.java
+ com.amazonaws.demo.androidpubsubwebsocket.BuildConfig
+com/amazonaws/demo/androidpubsubwebsocket/LoginActivity.java
+ com.amazonaws.demo.androidpubsubwebsocket.LoginActivity
