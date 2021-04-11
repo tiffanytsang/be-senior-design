@@ -19,7 +19,9 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import org.json.JSONArray;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 public class HeartRateActivity extends Activity implements MqttCallback {
@@ -43,7 +45,12 @@ public class HeartRateActivity extends Activity implements MqttCallback {
     String clientId;
     CognitoCachingCredentialsProvider credentialsProvider;
 
+    ArrayList<Date> timestampTesting = new ArrayList<>();
+    ArrayList<Integer> averageHeartRateTesting = new ArrayList<>();
+    ArrayList<Integer> likelihoodTesting = new ArrayList<>();
     ArrayList<Integer> minHeartRate = new ArrayList<>();
+    ArrayList<Integer> maxFromPastMinute = new ArrayList<>();
+    ArrayList<Integer> likelihoodArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,50 +106,130 @@ public class HeartRateActivity extends Activity implements MqttCallback {
     @Override
     public void messageArrived(String topic, MqttMessage message) throws Exception {
         String payload = new String(message.getPayload());
-        JSONArray json = new JSONArray(payload);
-        Log.d(LOG_TAG, "Heart rate json: " + json);
+        JSONArray json = new JSONArray(payload); // data for 6 seconds
+        //  Log.d(LOG_TAG, "Heart rate json: " + json);
         try {
-            int averageHr = 0;
-            int min = Integer.MAX_VALUE;
-            int maxFromPastMinute = 0;
+            int averageHr = 0; // average for the last 6 seconds
+            int minFromPast6Seconds = Integer.MAX_VALUE;
+            int maxFromPast6Seconds = 0;
+
             for(int i = 0; i < json.length(); i++) {
                 int hr = json.getJSONObject(i).getJSONObject("values").getJSONObject("ICvW4uBdSl_HRM").getInt("hrm");
                 averageHr += hr;
-                if (min > hr) {
-                    min = hr;
+                if (minFromPast6Seconds > hr) {
+                    minFromPast6Seconds = hr;
                 }
-                if (maxFromPastMinute < hr) {
-                    maxFromPastMinute = hr;
+                if (maxFromPast6Seconds < hr) {
+                    maxFromPast6Seconds = hr;
                 }
             }
 
-            averageHr = (int)(averageHr/json.length());
-            Log.d(LOG_TAG, "Average heart rate: " + averageHr);
-            minHeartRate.add(min);
+            Timestamp ts=new Timestamp(Long.parseLong(json.getJSONObject(0).getString("ts")));
+            Date date=new Date(ts.getTime());
+            timestampTesting.add(date);
+            averageHr = (int)(averageHr/json.length()); // average for the last 6 seconds
+            averageHeartRateTesting.add(averageHr);
+            //  Log.d(LOG_TAG, "Average heart rate: " + averageHr);
+            minHeartRate.add(minFromPast6Seconds); // at its max will have 100 values, 10 values for minute
+            maxFromPastMinute.add(maxFromPast6Seconds);
 
-            int minOfMin = Integer.MAX_VALUE;
-
+            int minOfMin = Integer.MAX_VALUE; // min from the past 10 minutes
             for (int i = 0; i < minHeartRate.size(); i++) {
                 if (minOfMin > minHeartRate.get(i)) {
                     minOfMin = minHeartRate.get(i);
                 }
             }
 
+            int maxOfMax = 0; // max from the past minute
+            for (int i = 0; i < maxFromPastMinute.size(); i++) {
+                if (maxOfMax < maxFromPastMinute.get(i)) {
+                    maxOfMax = maxFromPastMinute.get(i);
+                }
+            }
+
             // Max from the past minute, min from the past 10 minutes
-            int range = maxFromPastMinute - minOfMin;
+            int range = maxOfMax - minOfMin;
             if (range >= 30) {
                 alertUser("heart rate", range);
             }
             textView_hrReading.setText("" + averageHr);
 
             // Likelihood of POTS attack
-            textView_percentage.setText("" + range * 2);
+            int likelihood = range * 2 - 10;
+            if (likelihood < 0) {
+                likelihood = 0;
+            }
+            if (likelihood > 100) {
+                likelihood = 100;
+            }
+            textView_percentage.setText("" + likelihood);
+            likelihoodArray.add(likelihood); // values from the past 10 minutes
+            likelihoodTesting.add(likelihood);
 
-            if (minHeartRate.size() > 10) {
-                minHeartRate.remove(0);
+            if (minHeartRate.size() > 10*10) {
+                for (int i = 0; i < 10; i++) {
+                    minHeartRate.remove(0);
+                    likelihoodArray.remove(0);
+                }
             }
 
-        } catch (Exception e) { e.printStackTrace(); }
+            if (maxFromPastMinute.size() > 10) {
+                maxFromPastMinute.remove(0); // remove last 6 seconds
+            }
+
+            StringBuilder sb = new StringBuilder();
+            sb.append(date.toString());
+            sb.append(',');
+            sb.append(averageHr);
+            sb.append(',');
+            sb.append(likelihood);
+            sb.append('\n');
+            Log.d(LOG_TAG, sb.toString());
+
+            if (likelihoodTesting.size() > 200) { // 200
+                convertToCSV();
+                timestampTesting = new ArrayList<>();
+                averageHeartRateTesting = new ArrayList<>();
+                likelihoodTesting = new ArrayList<>();
+            }
+
+            //average HR (every 6 seconds), min (every 6 seconds), likelihood (every 6 seconds)
+            //10 minutes overall?
+
+            // timestamp, average HR, likelihood, recorded for 20 minutes
+            // recent on the bottom
+            // excel
+
+        } catch (Exception e) {
+            // e.printStackTrace();
+        }
+    }
+
+    public void convertToCSV() {
+        Log.d(LOG_TAG, "Creating CSV now.");
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("timestamp");
+            sb.append(',');
+            sb.append("average hr");
+            sb.append(',');
+            sb.append("likelihood");
+            sb.append('\n');
+
+
+            for (int i = 0; i < averageHeartRateTesting.size(); i++) {
+                sb.append(timestampTesting.get(i).toString());
+                sb.append(',');
+                sb.append(averageHeartRateTesting.get(i).toString());
+                sb.append(',');
+                sb.append(likelihoodTesting.get(i).toString());
+                sb.append('\n');
+            }
+            Log.d(LOG_TAG, sb.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -152,6 +239,11 @@ public class HeartRateActivity extends Activity implements MqttCallback {
 
     public void back(View view) {
         Intent intent = new Intent(HeartRateActivity.this, HomeScreenActivity.class);
+        startActivity(intent);
+    }
+
+    public void explain(View view) {
+        Intent intent = new Intent(HeartRateActivity.this, ExplainActivity.class);
         startActivity(intent);
     }
 }

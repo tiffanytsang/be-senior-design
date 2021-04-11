@@ -7,11 +7,11 @@ import android.view.View;
 
 public class HomeScreenActivity extends Activity {
 
-    double circumference1 = 5.1;
-    double circumference2 = 5.5;
-    double circumference3 = 5.7;
-    double circumference4 = 5.4;
-    double circumference5 = 5.2;
+    double circumference1 = .351;
+    double circumference2 = .345;
+    double circumference3 = .307;
+    double circumference4 = .254;
+    double circumference5 = .245;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +49,11 @@ public class HomeScreenActivity extends Activity {
             circumference4 = (Double) intent.getExtras().get("pressure4");
             circumference5 = (Double) intent.getExtras().get("pressure5");
         } catch (Exception e) {
-            circumference1 = 5.1;
-            circumference2 = 5.5;
-            circumference3 = 5.7;
-            circumference4 = 5.4;
-            circumference5 = 5.2;
+            circumference1 = .351;
+            circumference2 = .345;
+            circumference3 = .307;
+            circumference4 = .254;
+            circumference5 = .245;
         }
     }
 

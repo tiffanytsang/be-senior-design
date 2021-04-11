@@ -40,6 +40,8 @@ public class PressureActivity extends Activity {
     String clientId;
     CognitoCachingCredentialsProvider credentialsProvider;
 
+    boolean toasted = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,14 +93,13 @@ public class PressureActivity extends Activity {
                                                         String message = new String(data, "UTF-8");
                                                         ArrayList<Double> calibratedPressureReadings = calibrateRawPressureReadings(message);
                                                         for (int i = 0; i < calibratedPressureReadings.size(); i++) {
-                                                            if (calibratedPressureReadings.get(i) >= 35) {
+                                                            if (!toasted && calibratedPressureReadings.get(i) >= 35) {
+                                                                toasted = true;
+                                                                Log.d(LOG_TAG, "weird calibrated pressure: " + calibratedPressureReadings.get(i));
                                                                 alertUser("pressure", 1);
                                                             }
-                                                            if (calibratedPressureReadings.get(i) <= 15) {
-                                                                alertUser("pressure", 0);
-                                                            }
                                                         }
-                                                        Log.d(LOG_TAG, " Calibrated Pressures: " + calibratedPressureReadings);
+                                                        // Log.d(LOG_TAG, " Calibrated Pressures: " + calibratedPressureReadings);
                                                         textView_pReading1.setText(""+calibratedPressureReadings.get(0));
                                                         textView_pReading2.setText(""+calibratedPressureReadings.get(1));
                                                         textView_pReading3.setText(""+calibratedPressureReadings.get(2));
@@ -132,8 +133,6 @@ public class PressureActivity extends Activity {
     }
 
     public ArrayList<Double> calibrateRawPressureReadings(String rawReading) {
-
-        //TODO: add tula logo, make light blue lighter, make white text dark blue
         String [] array = rawReading.split(",");
         double pad_value1 = Double.parseDouble(array[0]);
         double pad_value2 = Double.parseDouble(array[1]);
@@ -198,53 +197,49 @@ public class PressureActivity extends Activity {
 
         Log.d(LOG_TAG, "rpad values: " + rpad1 + " " + rpad2 + " " + rpad3 + " " + rpad4 + " " + rpad5);
 
-        double strain1 = (rpad1 - baseRes1) / baseRes1;
-        double strain2 = (rpad2 - baseRes2) / baseRes2;
-        double strain3 = (rpad3 - baseRes3) / baseRes3;
-        double strain4 = (rpad4 - baseRes4) / baseRes4;
-        double strain5 = (rpad5 - baseRes5) / baseRes5;
+//        double strain1 = (rpad1 - baseRes1) / baseRes1;
+//        double strain2 = (rpad2 - baseRes2) / baseRes2;
+//        double strain3 = (rpad3 - baseRes3) / baseRes3;
+//        double strain4 = (rpad4 - baseRes4) / baseRes4;
+//        double strain5 = (rpad5 - baseRes5) / baseRes5;
 
-        Log.d(LOG_TAG, "Strain: " + strain1 + " " + strain2 + " " + strain3 + " " + strain4 + " " + strain5);
+        double strain1 = (rpad1 * 0.0000706) - 0.188;
+        double strain2 = (rpad2 * 0.000303) - 0.651;
+        double strain3 = (rpad3 * 0.000096) - 0.202;
+        double strain4 = (rpad4 * 0.0000978) - 0.101;
+        double strain5 = (rpad5 * 0.000373) - 0.127;
+        // Log.d(LOG_TAG, "Strain: " + strain1 + " " + strain2 + " " + strain3 + " " + strain4 + " " + strain5);
 
-
-        //for validation: convert to csv file
         ArrayList<Double> calibratedPressureReadings = new ArrayList<>();
         calibratedPressureReadings.add((thickness * strain1 * epsilon) / (radius1 * 133));
         calibratedPressureReadings.add((thickness * strain2 * epsilon) / (radius2 * 133));
         calibratedPressureReadings.add((thickness * strain3 * epsilon) / (radius3 * 133));
         calibratedPressureReadings.add((thickness * strain4 * epsilon) / (radius4 * 133));
         calibratedPressureReadings.add((thickness * strain5 * epsilon) / (radius5 * 133));
-
         Log.d(LOG_TAG, "Calibrated Pressure: " + calibratedPressureReadings);
-
         return calibratedPressureReadings;
     }
 
     public void alertUser(String reason, final int range) {
-        final Activity activity = this;
-        if (reason.equals("pressure") && range == 1) {
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    final Toast toast = Toast.makeText( activity,
-                            "Your pressure is above your threshold! Decrease your compression.",
-                            Toast.LENGTH_LONG);
-                    toast.show();
-                }
-            });
-        }
-        if (reason.equals("pressure") && range == -1) {
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    final Toast toast = Toast.makeText( activity,
-                            "Your pressure is below your threshold!",
-                            Toast.LENGTH_LONG);
-                    toast.show();
-                }
-            });
-        }
+        Activity activity = this;
+        Toast toast = Toast.makeText(activity,
+            "Your pressure is above your threshold! Decrease your compression.",
+            Toast.LENGTH_SHORT);
+        toast.show();
+//        if (reason.equals("pressure") && range == 1) {
+//            runOnUiThread(new Runnable() {
+//                public void run() {
+//                final Toast toast = Toast.makeText( activity,
+//                    "Your pressure is above your threshold! Decrease your compression.",
+//                    Toast.LENGTH_SHORT);
+//                toast.show();
+//                }
+//            });
+//        }
     }
 
     public void back(View view) {
+        toasted = false;
         Intent intent = new Intent(PressureActivity.this, HomeScreenActivity.class);
         startActivity(intent);
     }

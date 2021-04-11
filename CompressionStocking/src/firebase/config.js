@@ -3,7 +3,7 @@ import '@firebase/auth';
 import '@firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: '***REMOVED***',
+    apiKey: 'AIzaSyDXcCHic9k-3NukMh1ev-XUE-lZYv1Qwr0',
     authDomain: 'compressionstocking-90ddf.firebaseapp.com',
     databaseURL: 'https://compressionstocking-90ddf.firebaseio.com',
     projectId: 'compressionstocking-90ddf',

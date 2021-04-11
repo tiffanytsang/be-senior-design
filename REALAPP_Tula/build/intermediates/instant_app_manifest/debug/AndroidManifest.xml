@@ -10,6 +10,8 @@
         android:targetSdkVersion="23" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -27,6 +29,8 @@
         <activity android:name="com.amazonaws.demo.androidpubsubwebsocket.HomeScreenActivity" >
         </activity>
         <activity android:name="com.amazonaws.demo.androidpubsubwebsocket.HeartRateActivity" >
+        </activity>
+        <activity android:name="com.amazonaws.demo.androidpubsubwebsocket.ExplainActivity" >
         </activity>
         <activity android:name="com.amazonaws.demo.androidpubsubwebsocket.PressureActivity" >
         </activity>

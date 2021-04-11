@@ -78,11 +78,11 @@
     <View
         android:id="@+id/emptySpace"
         android:layout_width="match_parent"
-        android:layout_height="80dp" />
+        android:layout_height="50dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="115dp">
+        android:layout_height="130dp">
 
         <LinearLayout
             android:layout_width="200dp"
@@ -95,14 +95,14 @@
             <TextView
                 android:id="@+id/textView_attackPercentage"
                 android:layout_width="match_parent"
-                android:layout_height="83dp"
+                android:layout_height="130dp"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-black"
                 android:gravity="center"
-                android:text="Likelihood of POTS Attack"
+                android:text="Chance of POTS Attack"
                 android:textAlignment="center"
                 android:textColor="#274370"
-                android:textSize="16sp" />
+                android:textSize="24sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -136,7 +136,24 @@
             </LinearLayout>
 
         </LinearLayout>
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="82dp">
+
+        <Button
+            android:id="@+id/button_explain"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="#274370"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:onClick="explain"
+            android:text="What does this percentage mean?"
+            android:textColor="#A9D4F8"
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <View
