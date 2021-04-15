@@ -1,4 +1,4 @@
-# be-senior-design
+# tula
 
 Welcome to Tula: our senior design project! The mobile application can be found in the "Tula_FinalVersion" directory.
 
