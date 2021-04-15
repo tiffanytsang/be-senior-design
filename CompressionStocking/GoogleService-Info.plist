@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:769297201074:ios:d887ae28db0928d078d6ab</string>
+	<string>xxx</string>
 	<key>DATABASE_URL</key>
 	<string>https://compressionstocking-90ddf.firebaseio.com</string>
 </dict>
