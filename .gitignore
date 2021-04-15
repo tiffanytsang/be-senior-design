@@ -1,2 +1,11 @@
 wpa_supplicant.conf
 RaspberryFiles/
+.DS_Store
+.vscode/
+SSH.txt
+Tula/
+datasources.json
+heartrate1.csv
+heartrate2.csv
+heartrate3.csv
+sensor.py
