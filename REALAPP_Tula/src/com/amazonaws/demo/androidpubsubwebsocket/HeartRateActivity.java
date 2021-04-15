@@ -80,6 +80,7 @@ public class HeartRateActivity extends Activity implements MqttCallback {
             String topic = "pots/topic/hrm";
             client.subscribe(topic);
         } catch (MqttException e) {
+            Log.d(LOG_TAG, "Line 83 is where it is failing");
             e.printStackTrace();
         }
     }
@@ -107,7 +108,7 @@ public class HeartRateActivity extends Activity implements MqttCallback {
     public void messageArrived(String topic, MqttMessage message) throws Exception {
         String payload = new String(message.getPayload());
         JSONArray json = new JSONArray(payload); // data for 6 seconds
-        //  Log.d(LOG_TAG, "Heart rate json: " + json);
+          Log.d(LOG_TAG, "Heart rate json: " + json);
         try {
             int averageHr = 0; // average for the last 6 seconds
             int minFromPast6Seconds = Integer.MAX_VALUE;
